@@ -1,0 +1,10 @@
+[ignore]
+.*/public/.*
+.*/transpiled/.*
+.*/.module-cache/.*
+.*/.node_modules/.*
+[include]
+
+[libs]
+
+[options]

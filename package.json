@@ -1,0 +1,45 @@
+{
+  "name": "scoreboard-sort",
+  "description": "training utils for the ACM ICPC PUCP team",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/andreqi/scoreboard-sort.git"
+  },
+  "dependencies": {
+    "JSONStream": "*",
+    "immutable": "*",
+    "jquery": "*",
+    "express": "*",
+    "jade": "*",
+    "node-jsx": "*",
+    "react-bootstrap": "*",
+    "browserify": "*",
+    "d3": "*",
+    "q": "*",
+    "rx": "*",
+    "react": "*",
+    "reactify": "*"
+  },
+  "scripts": {
+    "transpile": "mkdir -p transpiled/ && jstransform --strip-types --harmony --es6module --watch assets/ transpiled/",
+    "build-js": "mkdir -p public && browserify transpiled/app.js --standalone Application --debug --outfile public/main.js",
+    "build": "npm run build-js",
+    "watch": "npm run transpile & nodemon --exec \"npm run build\" --ignore public/main.js -e js,jsx"
+  },
+  "engines": {
+    "node": "0.12.0"
+  },
+  "browserify": {
+    "transform": [
+      [
+        "reactify",
+        {
+          "es6": true
+        }
+      ]
+    ]
+  },
+  "devDependencies": {
+    "jest-cli": "^0.4.13"
+  }
+}

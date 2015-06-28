@@ -1,0 +1,7 @@
+[user]
+  name = Andre Quispesaravia
+  email = andreq@fb.com
+[filter "lfs"]
+	clean = git lfs clean %f
+	smudge = git lfs smudge %f
+	required = true
