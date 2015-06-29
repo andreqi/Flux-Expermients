@@ -10,15 +10,27 @@ var TreeTile = React.createClass({
   },
 
   render(): Object {
+    var tickHandler = () => this.props.onClick(this.props.rect.idx);
     return (
-      <rect
-        width={String(this.props.rect.width)}
-        height={String(this.props.rect.height)}
-        x={String(this.props.rect.x)}
-        y={String(this.props.rect.y)}
-        fill={this.props.color}
-        onClick={() => this.props.onClick(this.props.rect.idx)}
-      />
+      <span
+        style= {{
+          position: 'absolute',
+          width: this.props.rect.width,
+          height: this.props.rect.height,
+          top: this.props.rect.y,
+          left: this.props.rect.x,
+          'background-color': this.props.color,
+        }}
+        onClick={tickHandler}
+      >
+        <img style={{
+          overflow: 'hidden',
+          width: this.props.rect.width,
+          height: 'auto',
+          display: 'block',
+        }} src={this.props.rect.aux &&
+          this.props.rect.aux.link} />
+      </span>
     );
   },
 });

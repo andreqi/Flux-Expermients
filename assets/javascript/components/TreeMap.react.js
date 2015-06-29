@@ -16,24 +16,24 @@ var TreeMap = React.createClass({
     nodes: PropTypes.array.isRequired,
   },
 
-  onClick(idx: number): void {
-    console.log(idx);
-    Dispatcher.handleAction({
-      type: TreeStoreAction.INCREASE_WEIGHT_OF_NODE,
-      payload: {
-        idx,
-      }
-    });
+  onClick(idx: string): void {
+    window.open('http://imgur.com/'+idx,'_blank');
   },
 
   render(): Object {
     var rects = Tiling.getRectangles(
-      500,
-      500,
-      this.props.nodes
+      1000,
+      1000,
+      this.props.nodes,
     );
     return (
-      <svg width="500" height="500" viewBox="0 0 500 500">
+      <div
+        style={{
+          width: 1000,
+          height: 1000,
+          position: 'relative',
+        }}
+      >
       {
         rects.map((rect, idx) =>
           <TreeTile
@@ -42,10 +42,11 @@ var TreeMap = React.createClass({
             rect={rect}
             color={colors(rect.idx)}
             onClick={this.onClick}
+            src={rect.aux && rect.aux.link}
           />
         )
       }
-      </svg>
+      </div>
     );
   },
 });

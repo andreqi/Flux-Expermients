@@ -8,6 +8,7 @@ type Rectangle = {
   x: number,
   y: number,
   idx?: number,
+  aux?: Object,
 }
 
 class Tiling {
@@ -31,19 +32,19 @@ class Tiling {
       isVertical: boolean,
     ): void {
       if (left == right) {
-        console.log(rect.height * rect.width);
         rect.idx = nodes[left - 1].idx;
+        rect.aux = nodes[left - 1].aux;
         rectangles.push(rect);
         return;
       }
       var total = prefixSum[right] - prefixSum[left-1];
+      var mid = left;
       for (var idx = left; idx <= right; idx++) {
         var value = prefixSum[idx] - prefixSum[left-1];
         if (value * 2 <= total) {
           mid = idx;
         }
       }
-      var mid = Math.trunc((left + right) / 2);
       var sumRight = prefixSum[right] - prefixSum[mid];
       var sumLeft = prefixSum[mid] - prefixSum[left - 1];
       var prcLeft = sumLeft / (sumLeft + sumRight);

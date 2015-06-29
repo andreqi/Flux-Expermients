@@ -26,14 +26,7 @@ var TreeMapContainer = React.createClass({
 
   render(): Object {
     return (
-      <div>
-        <div>
-          Hai!
-          {' '}
-          {this.state.nodes.map(node => node.label).join(' ,')}
-        </div>
-        <TreeMap nodes={this.state.nodes} />
-      </div>
+      <TreeMap nodes={this.state.nodes} />
     );
   },
 });

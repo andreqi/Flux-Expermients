@@ -9,18 +9,20 @@ var {TreeStoreAction} = require('./AppAction');
 export type TreeNode = {
   label: string,
   weight: number,
-  idx: number,
+  idx: string,
+  aux?: Object,
 };
 
 class TreeState {
   _nodes: Array<TreeNode>;
 
-  changeValues(newValues: Array<number>): void {
+  changeValues(newValues: Array<{weight: number, idx: string, aux: Object}>): void {
     this._nodes = newValues.map((val, index) => {
       return {
-        label: 'Label ' + val,
-        weight: val,
-        idx: index,
+        label: 'Label ' + val.weight,
+        weight: val.weight,
+        idx: val.idx,
+        aux: val.aux,
       };
     });
   }
@@ -29,9 +31,12 @@ class TreeState {
     return this._nodes.slice();
   }
 
-  increase(idx: number): void {
-    this._nodes[idx].weight += 1;
-    this._nodes[idx].label = 'Label ' + this._nodes[idx].weight;
+  increase(idx: string): void {
+    this._nodes.forEach(node => {
+      if (node.idx != idx) return;
+      node.weight += 100;
+      node.label = 'Label ' + node.weight;
+    });
   }
 };
 
