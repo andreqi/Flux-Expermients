@@ -5,10 +5,11 @@ var {TreeStoreAction} = require('./javascript/stores/AppAction');
 
 var InterwebsBuilder = require('./javascript/data-dispatchers/Interwebs');
 var URI = require('./javascript/data-dispatchers/URI');
+var {HOSTNAME} = require('./config');
 
 var interweb = new InterwebsBuilder();
 interweb
-  .get(new URI("https://api.imgur.com/3/gallery/hot/viral/0.json"))
+  .get(new URI(HOSTNAME))
   .then(
     txt => {
       Dispatcher.handleAction({
@@ -20,7 +21,7 @@ interweb
             .map(d => {
               return {
                 weight: d.score,
-                idx: d.id,
+                idx: d.imgurID,
                 aux: d,
               };
             }),
